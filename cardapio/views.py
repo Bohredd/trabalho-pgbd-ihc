@@ -7,7 +7,7 @@ from datetime import timedelta
 # TODO: ARRUMAR ESSES REFS DE CADA HTML
 def ver_cardapio(request, restaurante_id):
     cardapio_rest = CardapioRestaurante.objects.get(id=restaurante_id).cardapio
-    return render(request, 'cardapio/ver_cardapio.html', {"cardapio": cardapio_rest})
+    return render(request, 'cardapio/ver_cardapio.html', {"cardapio": cardapio_rest, "restaurante_id": restaurante_id})
 
 def ver_cardapio_semana(request, restaurante_id):
     data_atual = timezone.now().date()
@@ -28,4 +28,4 @@ def ver_cardapio_semana(request, restaurante_id):
             cardapios_por_dia[dia] = []
         cardapios_por_dia[dia].append(cardapio_restaurante)
 
-    return render(request, 'cardapio/ver_cardapio_semana.html', {"cardapios_por_dia": cardapios_por_dia})
+    return render(request, 'cardapio/ver_cardapio_semana.html', {"cardapios_por_dia": cardapios_por_dia, "restaurante_id": restaurante_id})

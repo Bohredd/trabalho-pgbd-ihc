@@ -5,8 +5,8 @@ class Carteira(models.Model):
     saldo = models.FloatField(default=0)
 
     def levantamento_entradas_saidas(self):
-        entradas = Transacao.objects.filter(carteira=self, is_entrada=True)
-        saidas = Transacao.objects.filter(carteira=self, is_entrada=False)
+        entradas = Transacao.objects.filter(carteira=self, is_entrada=True).aggregate(models.Sum('valor'))['valor__sum'] or 0
+        saidas = Transacao.objects.filter(carteira=self, is_entrada=False).aggregate(models.Sum('valor'))['valor__sum'] or 0
         return entradas, saidas
 
 class Transacao(models.Model):
@@ -16,7 +16,7 @@ class Transacao(models.Model):
     is_entrada = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.carteira.usuario.nome + ' - ' + str(self.valor) + ' - ' + str(self.data)
+        return self.carteira.usuario.nome_completo + ' - ' + str(self.valor) + ' - ' + str(self.data)
 
     def save(self, *args, **kwargs):
         self.carteira.saldo += self.valor if self.is_entrada else -self.valor

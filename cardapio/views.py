@@ -4,8 +4,9 @@ from restaurante.models import CardapioRestaurante
 from cardapio.models import Cardapio
 from datetime import timedelta
 
-def ver_cardapio(request, ref_restaurante_id):
-    cardapio_rest = CardapioRestaurante.objects.get(id=ref_restaurante_id).cardapio
+# TODO: ARRUMAR ESSES REFS DE CADA HTML
+def ver_cardapio(request, restaurante_id):
+    cardapio_rest = CardapioRestaurante.objects.get(id=restaurante_id).cardapio
     return render(request, 'cardapio/ver_cardapio.html', {"cardapio": cardapio_rest})
 
 def ver_cardapio_semana(request, restaurante_id):

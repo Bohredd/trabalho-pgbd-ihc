@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio da Semana</title>
+</head>
+<body>
+    <h1>Cardápio da Semana</h1>
+
+    {% for dia, cardapios in cardapios_por_dia.items %}
+        <h2>{{ dia|date:"d/m/Y" }}</h2>
+
+        <ul>
+            {% for cardapio_restaurante in cardapios %}
+                <li>
+                    <strong>{{ cardapio_restaurante.cardapio.nome }}</strong>
+                    <p>Horário de Abertura: {{ cardapio_restaurante.cardapio.refeicao.horario_abertura }}</p>
+                </li>
+            {% empty %}
+                <li>Nenhum cardápio disponível para este dia.</li>
+            {% endfor %}
+        </ul>
+    {% empty %}
+        <p>Nenhum cardápio disponível para esta semana.</p>
+    {% endfor %}
+
+    <a href="{% url 'ver_cardapio' restaurante_id %}">Voltar ao Cardápio do Restaurante</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueci a Senha</title>
+</head>
+<body>
+    <h1>Esqueci a Senha</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ password_reset_form.email.label_tag }}
+        {{ password_reset_form.email }}
+        <button type="submit">Enviar instruções de redefinição de senha</button>
+    </form>
+
+    <p>Lembrou sua senha? <a href="{% url 'login' %}">Faça login</a></p>
+</body>
+</html>

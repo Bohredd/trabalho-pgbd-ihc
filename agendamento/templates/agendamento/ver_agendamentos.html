@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Agendamentos</title>
+</head>
+<body>
+    <h1>Meus Agendamentos</h1>
+
+    {% if agendamentos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Restaurante</th>
+                    <th>Refeição</th>
+                    <th>Data do Agendamento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for agendamento in agendamentos %}
+                    <tr>
+                        <td>{{ agendamento.id }}</td>
+                        <td>{{ agendamento.cardapio_agendado.restaurante.nome }}</td>
+                        <td>{{ agendamento.cardapio_agendado.refeicao.nome }}</td>
+                        <td>{{ agendamento.data_agendamento|date:"d/m/Y H:i" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Você não tem agendamentos registrados.</p>
+    {% endif %}
+</body>
+</html>

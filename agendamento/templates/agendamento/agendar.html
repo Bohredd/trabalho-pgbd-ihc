@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Refeição</title>
+</head>
+<body>
+    <h1>Agendar Refeição</h1>
+
+    <h2>Cardápios Disponíveis</h2>
+    <ul>
+        {% for cardapio in cardapios %}
+            <li>{{ cardapio }}</li>
+        {% empty %}
+            <li>Não há cardápios disponíveis para este restaurante.</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Agendar</button>
+    </form>
+
+    <a href="{% url 'ver_agendamentos' %}">Ver meus agendamentos</a>
+</body>
+</html>

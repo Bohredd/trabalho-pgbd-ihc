@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Carteira</title>
+</head>
+<body>
+    <h1>Minha Carteira</h1>
+
+    {% if carteira %}
+        <p><strong>Saldo Atual:</strong> R$ {{ carteira.saldo|floatformat:2 }}</p>
+        <p><strong>Transações:</strong></p>
+        <ul>
+            {% for transacao in carteira.transacao_set.all %}
+                <li>
+                    {{ transacao.data|date:"d/m/Y" }} - R$ {{ transacao.valor|floatformat:2 }} -
+                    {% if transacao.is_entrada %}Entrada{% else %}Saída{% endif %}
+                </li>
+            {% empty %}
+                <li>Nenhuma transação encontrada.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'realizar_recarga' %}">Realizar Recarga</a>
+    {% else %}
+        <p>Nenhuma carteira encontrada para o usuário.</p>
+        <a href="{% url 'realizar_recarga' %}">Criar Carteira</a>
+    {% endif %}
+
+    <a href="/">Voltar para o Início</a>
+</body>
+</html>

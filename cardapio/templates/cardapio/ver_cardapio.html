@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio do Restaurante</title>
+</head>
+<body>
+    <h1>Cardápio</h1>
+
+    <h2>{{ cardapio.nome }}</h2>
+
+    <ul>
+        {% for refeicao in cardapio.refeicoes.all %}
+            <li>
+                <strong>{{ refeicao.nome }}</strong>
+                <p>{{ refeicao.descricao }}</p>
+            </li>
+        {% empty %}
+            <li>Nenhuma refeição disponível.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'ver_cardapio_semana' cardapio.restaurante.id %}">Ver Cardápio da Semana</a>
+</body>
+</html>

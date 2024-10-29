@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Recarga</title>
+</head>
+<body>
+    <h1>Realizar Recarga</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Realizar Recarga</button>
+    </form>
+
+    {% if form.non_field_errors %}
+        <div style="color: red;">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <a href="{% url 'ver_carteira' %}">Voltar para Minha Carteira</a>
+</body>
+</html>
